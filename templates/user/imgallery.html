@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<div class="text-center fs-2">
+     Our Successful <b class="txt-mycolor "> Events <i class="fa-regular fa-image"></i></b>
+</div>
+<div class="row  mx-1">
+    <div class="col-sm-2 py-2 rounded rounded-3 mb-2 " style="background:#d1d1d1;">
+        <ul class="list-group">
+            <li class="list-group-item bg-mycolor">Successful Events</li>
+            {% for i in idata%}
+            <li class="list-group-item">
+            <img src="/{{i.picture}}" style="max-height:40px; max-width:40px;" class="img-thumbnail">
+               <b><a style="text-decoration:none;" href="/user/imgallery/?cid={{i.id}}"> {{i.event_name}}</a></b>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-sm-10 ">
+        <div class="row ">
+            {% for i in idata %}
+            <div class="col-sm-4  py-2">
+                <div class="card" style="width: 25rem;">
+                    <img src="/{{i.picture}}" class="card-img-top" alt="..." style="height:200px;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{i.category}}</h5>
+                       <b> {{i.event_name}}</b>
+                        <p class="card-text">{{i.event_des}}<br>
+                            <span class="badge bg-mycolor">
+                             <i class="fa-solid fa-calendar-days"></i> {{i.eventdate}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock%}

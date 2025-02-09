@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<div>
+    <form method="get" action="/user/booking/">
+        <input type="hidden" name="title" value="{{i.event_category}}">
+          <input type="hidden" name="epic" value="{{i.event_picture}}">
+          <input type="hidden" name="place" value="{{i.place}}">
+          <input type="hidden" name="price" value="{{i.price}}">
+          <input type="hidden" name="edate" value="{{i.event_date}}">
+          <input type="hidden" name="bdate" value="{{i.booking_date}}">
+          <input type="submit" value="Book Now" class="btn bg-mycolor text-light">
+    </form>
+</div>
+
+<!-- <div class="row py-4 "> 
+    <div class="col-sm-5 mx-auto bg-mycolor rounded rounded-3 " id="frm"> 
+      <center><h1> Booking Your Event</h1></center>
+          <form method="post" action="/user/booking/">
+              {% csrf_token %}
+              Name
+              <input type="text" name="title" required placeholder="Name.." class="form-control" />
+              Password
+              <input type="date" name="edate" required placeholder="Password.." class="form-control" />
+               (Whatsapp No )
+              <input type="date" name="bdate" required placeholder="Mobile.." class="form-control" />
+  
+              <input type="submit" value="Save" class="btn bg-dark text-light my-2" />
+          </form>
+       </div> -->
+
+{% endblock %}

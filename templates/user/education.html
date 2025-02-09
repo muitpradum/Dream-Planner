@@ -1,0 +1,47 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<div class="text-center fs-2">
+    Our<b class="txt-mycolor"> Event Category <i class="fa-solid fa-newspaper"></i></b>
+</div>
+<div class="row ">
+    <div class="col-sm-6 mx-auto mt-3">
+        <form method="get">
+        <div class="input-group">
+            <input type="text" name="search" style="background:#d1d1d1;" placeholder="Search Events" class="form-control">
+            <i class="input-group-text bg-mycolor" >
+                <input type="submit" value="Search" class="btn">
+            </i>
+        </div>
+            </form>
+    </div>
+    <div class="row my-3">
+        {% for a in eddata %}
+            <!-- start category event -->
+        <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card">
+                    <img src="/{{a.event_picture}}" style="min-height:210px;" class="card-img-top"/>
+                    <div class="card-body">
+                   
+                <b>{{a.event_name}} :</b>  {{a.event_code}}<br>
+                        {{a.speaker_name}}<br>
+                        {{a.event_place}}<br>
+                        {{a.place}}&emsp;&emsp;Date: {{a.event_date}}<br>
+                        Student No.: {{a.no_guests}}<br>
+                        Workshops Link :
+                        <a href="{{a.join}}" target="_blank" class="btn btn-dark btn-sm rounded- rounded-3"> Join </i></a><br>
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                    <b>: {{a.price}}/</b><br/>
+                       <a href="/user/viewdetails/?messag={{a.id}}" class="btn btn-sm rounded-pill bg-mycolor text-light">View Detail<i class="fa-solid fa-eye"></i></a>
+    
+                </div>
+                </div>
+            </div>
+                <!-- end category event -->
+            {% endfor %}
+        </div>
+</div>
+
+
+{% endblock %}

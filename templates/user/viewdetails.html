@@ -1,0 +1,329 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+{% if not request.session.user %}
+<script>
+  alert('You have to login first..');
+  location.href = '/user/signin';
+</script>
+{% endif %}
+<style>
+  #frm {
+      display: none;
+  }
+</style>
+
+<script>
+  function demo() {
+      document.getElementById("frm").style.display = "block"
+  }
+</script>
+<div class="text-center fs-2">
+  Event <b class="txt-mycolor ">Details <i class="fa-regular fa-address-card"></i></b>
+</div>
+<div class="row">
+  <div class="col-sm-10 mx-auto">
+    <!--start card social-->
+    {% for i in edata%}
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="/{{i.event_picture}}" style="min-height:380px;" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{i.event_category}}</h5>
+            <b>{{i.event_name}}</b>:{{i.event_code}}<br>
+            <p class="card-text">{{i.event_detail}}</p>
+            <p class="card-text"><big>{{i.event_place}} &nbsp;&nbsp;&nbsp;
+            <p class="card-text"><i class="fa-solid fa-hotel"></i> {{i.place}}&nbsp;&nbsp;&nbsp;&nbsp;
+              <big><i class="fa-solid fa-indian-rupee-sign"></i> {{i.price}}&nbsp;&nbsp;&nbsp;&nbsp;
+                <br>Guests No. : {{i.no_guests}}</big>
+            </p>
+           
+                <!-- <p><big><i class="fa-solid fa-calendar-days"></i>  {{i.event_date}}</big>&nbsp;&nbsp;&nbsp;&nbsp; -->
+              </small></p>
+            <form method="get" action="/user/booking/">
+              <input type="hidden" name="title" value="{{i.event_name}}">
+              <input type="hidden" name="epic" value="{{i.event_picture}}">
+              <input type="hidden" name="sname" value="{{i.speaker_name}}">
+              <input type="hidden" name="city" value="{{i.city_name}}">
+              <input type="hidden" name="place" value="{{i.place}}">
+              <input type="hidden" name="price" value="{{i.price}}">
+              <input type="date" class=" text-dark rounded rounded-3" name="edate" value="" required>
+              <br><br>
+              <input type="submit" value="Book Now" class="btn bg-mycolor text-light">
+              <a href="#" class="btn btn-dark text-light" onclick="demo()"> Request Pricing </a>
+            </form>
+            <div class="row py-4 ">
+              
+              <div class="col-sm-12 mx-auto  rounded rounded-3 " id="frm"> 
+                <h1> Request Pricing</h1>
+               
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        Name :
+                        <input type="text" name="name" required placeholder="Name.." class="form-control" />
+                        Email :
+                        <input type="email" name="email" required placeholder="Please Enter Your Email... " class="form-control" />
+                        Event Date :
+                        <input type="date" name="date" required placeholder="Please Enter Your Event Date..." class="form-control" />
+                        Request Price : 
+                        <input type="text" name="price" required placeholder="Please Enter Your Event Price..." class="form-control" />
+                        Number of Guests : 
+                        <input type="number" name="guests" required placeholder="Please Enter Your No. of Guests" class="form-control" />
+                        
+                        Mobile No.: 
+                        <input type="tel" name="mobile" required placeholder="Please Enter Your Mobile No. ... " class="form-control" />
+                        Message :
+                        <textarea class="form-control" name="text" placeholder="Please Enter Your Message..."></textarea>
+            
+                        <input type="submit" value="Save" class="btn bg-dark text-light my-2" />
+                    </form>
+                </div>
+              <div class="col-sm-3"></div>
+            
+               
+               
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor%}
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-10 mx-auto">
+    <!--start card informal-->
+    {% for i in idata%}
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="/{{i.event_picture}}" style="min-height:350px; min-width:100%; " class="img-fluid rounded-start " alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{i.event_category}}</h5>
+            <b>{{i.event_name}} : </b>{{i.event_code}}<br>
+            <p class="card-text">{{i.event_detail}}</p>
+            <p class="card-text"><big>{{i.speaker_name}} &nbsp;&nbsp;&nbsp;
+               </p>
+            <p class="card-text"><i class="fa-solid fa-hotel"></i> {{i.place}}&nbsp;&nbsp;&nbsp;&nbsp;<br>
+              <big><i class="fa-solid fa-indian-rupee-sign"></i> {{i.price}}</big>
+            </p>
+            
+               <p> <big><i class="fa-solid fa-calendar-days"></i> {{i.event_date}}</big>&nbsp;&nbsp;&nbsp;&nbsp;
+              </small></p>
+            <form method="get" action="/user/booking/">
+              <input type="hidden" name="title" value="{{i.event_name}}">
+              <input type="hidden" name="epic" value="{{i.event_picture}}">
+              <input type="hidden" name="sname" value="{{i.speaker_name}}">
+              <input type="hidden" name="city" value="{{i.city_name}}">
+              <input type="hidden" name="place" value="{{i.place}}">
+              <input type="hidden" name="price" value="{{i.price}}">
+              <input type="hidden" name="edate" value="{{i.event_date}}">
+              <input type="submit" value="Book Now" class="btn bg-mycolor text-light">
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor%}
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-10 mx-auto">
+    <!--start card charity-->
+    {% for i in fdata%}
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="/{{i.event_picture}}" style="max-height:600px; " class="img-fluid rounded-start max-width:100%" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{i.event_category}}</h5>
+            <b>{{i.event_name}} : </b>{{i.event_code}}<br>
+            <p class="card-text">{{i.event_detail}}</p>
+            <p class="card-text"><big>{{i.NGO_name}} &nbsp;&nbsp;&nbsp;
+             Donate: <img src="/{{i.donation}}" class="img-thumbnail" style="max-height:200px;"></big></p>
+            <p class="card-text"><i class="fa-solid fa-hotel"></i> {{i.place}}&nbsp;&nbsp;&nbsp;&nbsp;
+              
+            </p>
+            <p> <big><i class="fa-solid fa-calendar-days"></i> {{i.event_date}}</big>&nbsp;&nbsp;&nbsp;&nbsp;
+              </small></p>
+            <form method="get" action="/user/booking/">
+              <!-- <input type="hidden" name="title" value="{{i.event_name}}">
+              <input type="hidden" name="epic" value="{{i.event_picture}}">
+              <input type="hidden" name="sname" value="{{i.speaker_name}}">
+              <input type="hidden" name="city" value="{{i.city_name}}"> -->
+              <!-- <input type="hidden" name="place" value="{{i.place}}">
+              <input type="hidden" name="price" value="{{i.price}}">
+              <input type="hidden" name="edate" value="{{i.event_date}}">
+              <input type="submit" value="Book Now" class="btn bg-mycolor text-light"> -->
+              <a href="#" class="btn btn-dark text-light" onclick="demo()"> Donation </a>
+            </form>
+            <div class="row py-4 ">
+              
+              <div class="col-sm-12 mx-auto  rounded rounded-3 " id="frm"> 
+                <h1> Request Pricing</h1>
+               
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        Name :
+                        <input type="text" name="name" required placeholder="Name.." class="form-control" />
+                        Email :
+                        <input type="email" name="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}" required placeholder="Please Enter Your Email... " class="form-control" />
+                        DOB :
+                        <input type="date" name="date" required placeholder="Please Enter Your Event Date..." class="form-control" />
+                        Pan Number : 
+                        <input type="text" name="pan" required placeholder="Please Enter Your Event Price..." class="form-control" />
+                        UTR No. : 
+                        <input type="file" name="file" required placeholder="Please Enter Your No. of Guests" class="form-control" />
+                        Mobile No.: 
+                        <input type="tel" name="mobile"  pattern="[0-9]{10}" required placeholder="Please Enter Your Mobile No. ... " class="form-control" />
+                        Address :
+                        <textarea class="form-control" name="address" placeholder="Please Enter Your Message..."></textarea>
+            
+                        <input type="submit" value="Save" class="btn bg-dark text-light my-2" />
+                    </form>
+                </div>
+              <div class="col-sm-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor%}
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-10 mx-auto">
+    <!--start card education-->
+    {% for i in eddata%}
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="/{{i.event_picture}}" style="min-height:370px;" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{i.event_category}}</h5>
+            <b>{{i.event_name}} : </b> {{i.event_code}}<br>
+            <p class="card-text">{{i.event_detail}}</p>
+            <p class="card-text">{{i.event_place}}</p>
+            <p class="card-text"><big>{{i.speaker_name}} &nbsp;&nbsp;&nbsp;
+              Workshops Link :
+              <a href="{{i.join}}" target="_blank" class="btn btn-dark btn-sm rounded- rounded-3"> Join </i></a><br>
+            <p class="card-text"><i class="fa-solid fa-hotel"></i> {{i.place}}&nbsp;&nbsp;&nbsp;&nbsp;Student No.: {{i.no_guests}}<br/><br/>
+              <big><i class="fa-solid fa-indian-rupee-sign"></i> {{i.price}}</big>
+
+              &nbsp;&nbsp;&nbsp;&nbsp;
+             <big><i class="fa-solid fa-calendar-days"></i> {{i.event_date}}</big>
+            </small></p>
+            <form method="get" action="/user/booking/">
+              <input type="hidden" name="title" value="{{i.event_name}}">
+              <input type="hidden" name="epic" value="{{i.event_picture}}">
+              <input type="hidden" name="sname" value="{{i.speaker_name}}">
+              <input type="hidden" name="city" value="{{i.city_name}}">
+              <input type="hidden" name="place" value="{{i.place}}">
+              <input type="hidden" name="price" value="{{i.price}}">
+              <input type="hidden" name="edate" value="{{i.event_date}}">
+              <input type="submit" value="Book Now" class="btn bg-mycolor text-light">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor%}
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-10 mx-auto">
+    <!--start card event-->
+    {% for i in mdata%}
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="/{{i.event_picture}}" style="min-height:350px;" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{i.event_category}}</h5>
+            <b>{{i.event_name}}</b>:{{i.event_code}}<br>
+            <p class="card-text">{{i.event_detail}}</p>
+            <p class="card-text"><big>{{i.College_name}} &nbsp;&nbsp;&nbsp;
+                </p>
+            <p class="card-text"><i class="fa-solid fa-hotel"></i> {{i.place}}&nbsp;&nbsp;&nbsp;&nbsp;<br>
+              <b>City:</b> {{i.city}}<br>
+              <big><i class="fa-solid fa-indian-rupee-sign"></i> {{i.price}}</big>&nbsp;&nbsp;&nbsp;&nbsp;{{i.no_guests}}
+            </p>
+            <p>
+                <big><i class="fa-solid fa-calendar-days"></i> {{i.event_date}}</big>&nbsp;&nbsp;&nbsp;&nbsp;
+              </small></p>
+            <form method="get" action="/user/booking/">
+              <input type="hidden" name="title" value="{{i.event_name}}">
+              <input type="hidden" name="epic" value="{{i.event_picture}}">
+              <input type="hidden" name="sname" value="{{i.speaker_name}}">
+              <input type="hidden" name="city" value="{{i.city_name}}">
+              <input type="hidden" name="place" value="{{i.place}}">
+              <input type="hidden" name="price" value="{{i.price}}">
+              <input type="hidden" name="edate" value="{{i.event_date}}">
+              <input type="submit" value="Book Now" class="btn bg-mycolor text-light">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor%}
+
+  </div>
+</div>
+
+  <div class="col-sm-10 mx-auto">
+    <!--start card-->
+    {% for i in ssdata%}
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="/{{i.event_picture}}" style="max-height:200px;" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{i.event_category}}</h5>
+            <b>{{i.event_name}}</b>:{{i.event_code}}<br>
+            <p class="card-text">{{i.event_detail}}</p>
+            <p class="card-text"><big>{{i.speaker_name}} &nbsp;&nbsp;&nbsp;
+                <img src="/{{i.speaker_picture}}" class="img-thumbnail" style="max-height:40px;"></big></p>
+            <p class="card-text"><i class="fa-solid fa-hotel"></i> {{i.place}}&nbsp;&nbsp;&nbsp;&nbsp;
+              <big><i class="fa-solid fa-indian-rupee-sign"></i> {{i.price}}</big>
+            </p>
+            <p>
+                <big><i class="fa-solid fa-calendar-days"></i> {{i.event_date}}</big>&nbsp;&nbsp;&nbsp;&nbsp;
+              </small></p>
+            <form method="get" action="/user/booking/">
+              <input type="hidden" name="title" value="{{i.event_name}}">
+              <input type="hidden" name="epic" value="{{i.event_picture}}">
+              <input type="hidden" name="sname" value="{{i.speaker_name}}">
+              <input type="hidden" name="city" value="{{i.city_name}}">
+              <input type="hidden" name="place" value="{{i.place}}">
+              <input type="hidden" name="price" value="{{i.price}}">
+              <input type="hidden" name="edate" value="{{i.event_date}}">
+              <input type="submit" value="Book Now" class="btn bg-mycolor text-light">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor%}
+
+  </div>
+  
+  {% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if not request.session.user %}
+<script>
+    alert('You have to login first....');
+    location.href = '/user/login/'
+</script>
+{% endif %}
+<style>
+    #frm {
+        display: none;
+    }
+</style>
+
+<script>
+    function demo() {
+        document.getElementById("frm").style.display = "block"
+    }
+</script>
+<div class="text-center fs-2 mt-2">Your <b class="txt-mycolor"> Profile</b></div>
+<div class="row">
+    <div class="col-sm-5 mx-auto py-2">
+        {% for i in udata %}
+        <!-- stard Card-->
+        <div class="card mb-3 p-3 ">
+            <div class="row g-0">
+                <div class="col-md-5">
+                    <div class="card-body text-dark ">
+                        <p class="card-text" style="line-height: 28px; font-size:14px ;">
+                            <i class="fa-solid fa-user"></i> {{i.name}}<br />
+                            <i class="fa-solid fa-phone"></i> {{i.mobile}}<br />
+                            <i class="fa-solid fa-key"></i> {{i.passwd}}<br />
+                            <i class="fa-solid fa-envelope"></i> {{i.email}}</br>
+                            <i class="fa-solid fa-address-book"></i> {{i.address}}<br>
+                            <i class="fa-solid fa-venus-mars"></i>{{i.gender}}<br>
+                            <a href="#" class="btn btn-dark text-light" onclick="demo()">Edit Profile <i
+                                    class="fa-solid fa-pen-to-square btn-sm"></i></a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End card-->
+        {% endfor %}
+    </div>
+</div>
+<div class="row py-4 ">
+  <div class="col-sm-3"> </div>
+  <div class="col-sm-5 mx-auto bg-mycolor rounded rounded-3 " id="frm"> 
+    <center><h1> Update your Profile</h1></center>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            Name
+            <input type="text" name="name" required placeholder="Name.." class="form-control" />
+            Password
+            <input type="password" name="passwd" pattern=".{8,}" title="Eight or more characters"  required placeholder="Password.." class="form-control" />
+            Mobile (Whatsapp No )
+            <input type="number" name="mobile" pattern="[0-9]{10}" required placeholder="Mobile.." class="form-control" />
+            Email:
+            <input type="email"  name="email"  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}" required placeholder=" Enter your Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}" class="form-control">
+           Gender:
+           <input type="text" name="gender" placeholder=" Enter your Gender" class="form-control">
+           
+            Address:
+            <textarea class="form-control" name="address" placeholder="Address.."></textarea>
+            <input type="submit" value="Update" class="btn bg-dark text-light my-2" />
+        </form>
+    </div>
+  <div class="col-sm-3"></div>
+
+   
+   
+
+</div>
+{% endblock %}

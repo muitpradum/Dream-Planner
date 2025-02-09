@@ -1,0 +1,47 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<style>
+    .form-control {
+        height: 35px;
+    }
+</style>
+
+<div class="text-center fs-2"><b class="txt-mycolor">Registration <i class="fa-solid fa-pen-to-square"></i></b></div>
+<div class="row">
+    <div class="col-sm-6  mb-3 bg-mycolor1 py-3 rounded rounded-3 mx-auto my-3">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token%}
+            <div class="row">
+                <div class="col-sm-12 input-group mb-3">
+                    <i class="fa-solid fa-user input-group-text bg-mycolor text-light"></i>
+                    <input type="text" name="name" required placeholder=" Enter your Name" class="form-control">
+                </div>
+                <div class="col-sm-12 input-group mb-3">
+                    <i class="fa-solid fa-envelope input-group-text bg-mycolor text-light"></i>
+                    <input type="email"  name="email" required placeholder=" Enter your Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}" class="form-control">
+                </div>
+                <div class="col-sm-12 input-group mb-3">
+                    <i class="fa-solid fa-phone input-group-text bg-mycolor text-light"></i>
+                    <input type="tel" name="mobile" pattern="[0-9]{10}" required  placeholder="Mobile.." class="form-control">
+                </div>
+                <div class="col-sm-12 input-group mb-3">
+                    <i class=" input-group-text bg-mycolor text-light"><i class="fa-solid fa-key"></i></i>
+                    <input type="password" name="passwd" pattern=".{8,}" title="Eight or more characters" placeholder=" Enter your Password" class="form-control">
+                </div>
+                <div class="col-sm-12 input-group mb-3">
+                    <i class=" input-group-text bg-mycolor text-light"><i class="fa-solid fa-venus-mars"></i></i>
+                    <input type="text" name="gender" placeholder=" Enter your Gender" class="form-control">
+                </div>
+
+                <div class="col-sm-12 input-group mb-3">
+                    <i class="fa-solid fa-address-book input-group-text bg-mycolor text-light"></i>
+                    <textarea class="form-control" name="address" placeholder="Address.."></textarea>
+                </div>
+            </div>
+            <input type="submit" value=" Register" class="bg-mycolor btn rounded-pill" style="border:none;">
+
+        </form>
+    </div>
+</div>
+{% endblock%}

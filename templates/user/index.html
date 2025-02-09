@@ -1,0 +1,147 @@
+{% extends 'base.html'%}
+{% load static %}
+
+
+{% block content %}
+<div class="row t4">
+  <!-- <div class="row">
+    <div class="col-sm-6">
+       <h3 class="homeHeading__title mx-2 py-2">Discover everything you need to plan your big day</h3>
+       <p class="homeHeading__subtitle mx-2">Search over 74,000 local professionals with reviews, pricing, and more.</p>
+    </div>
+    <div class="col-sm-6">
+      
+       <div class="row">
+          <div class="col-sm-5 py-5">
+             <select name="event_name"class="w-100 form-control bg-mycolor1 text-dark" >
+              <option>Select Your Event</option>
+              {% for i in pdata %}
+              <option value="{{i.id}}">{{i.event_name}}</option>
+              {% endfor %}
+             </select>
+       </div>
+       <div class="col-sm-5 py-5">
+          <select name="city_name" class="w-100 form-control bg-mycolor1 text-dark">
+            <option>Select Your Location </option>
+                    {% for i in sdata %}
+                    <option value="{{i.id}}"> {{i.place}}</option>
+                    {% endfor %}
+          </select>
+       </div>
+       <div class="col-sm-2 py-5">
+          <input type="submit" value="Search" class="btn form-control bg-mycolor1 text-light"/>
+      </div> 
+          
+       </div>
+    </div>
+  </div> -->
+ </div>
+ <div class="row slider my-2">
+        <div class="col-sm-12 p-2">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                  
+                </div>
+                <div class="carousel-inner" data-bs-interval="3000">
+                  <div class="carousel-item active">
+                    <img src="/static/slider/DreamPlannerSlider_--_main.jpg" style="max-height:500px; border-radius:20px;" class="d-block  w-100 rounded rounded-3" alt="...">
+                    
+                  </div>
+                  {% for i in sldata%}
+                    <div class="carousel-item" data-bs-interval="3000">
+                      <img src="/{{i.spic}}" style="max-height:500px; border-radius:20px;"  class="d-block w-100 rounded rounded-3" alt="...">
+                    </div>
+                  {% endfor %}
+                 
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+</div>
+
+<div class="row  text-center mx-5  my-3" >
+  <div class="fs-3 text-center my-3">Event <b class="txt-mycolor">Category <i class="fa-solid fa-newspaper"></i></b> </div>
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="card1">
+          <img style="max-height:200px;" src="/static/images/social.jpg" class="card-img-top rounded rounded-3">
+          <div class="card-body">
+              <a style="text-decoration:none;" href="/user/soevent/"> <b><p class="text-center">Social Events</p></b></a>
+          </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card2">
+        <img style="max-height:200px;" src="/static/images/education.jpg" class="card-img-top rounded rounded-3">
+        <div class="card-body">
+            <a style="text-decoration:none;" href="/user/education/"><b><p class="text-center">Educational Events</p></b></a>
+        </div>
+    </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card3">
+        <img style="max-height:200px;" src="/static/images/informal.jpg" class="card-img-top rounded rounded-3">
+        <div class="card-body">
+            <a style="text-decoration:none;" href="/user/informal/"> <b><p class="text-center">Informal/Personal Events</p></b></a>
+        </div>
+    </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card4">
+        <img style="max-height:200px;" src="/static/images/charity.jpg" class="card-img-top rounded rounded-3">
+        <div class="card-body">
+            <a style="text-decoration:none;" href="/user/charity/"> <b><p class="text-center">Charity Events</p></b></a>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="row py-3" >
+  <div class="fs-3 text-center my-3">Upcoming <b class="txt-mycolor">Events <i class="fa-solid fa-newspaper"></i></b>  </div>
+   <div class="col-sm-12 mx-3">
+      <div class="row my-3">
+        {% for a in mdata %}
+            <!-- start upcomming event -->
+        <div class="col-lg-3 col-md-4 col-sm-12 my-2">
+                <div class="card">
+                    <img src="/{{a.event_picture}}" style="max-height:200px;" class="card-img-top"/>
+                    <div class="card-body">
+                    <b class="txt-mycolor">{{a.event_category}}</b><br/>
+                <b>{{a.event_name}}</b><br>
+                        {{a.College_name}}<br/>
+                        {{a.place}}<br>
+                        {{a.city}}<br>
+                        {{a.event_date}}<br>
+                        {{a.no_guests}}<br>
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                    <b>: {{a.price}}/</b><br/>
+                       <a href="/user/viewdetails/?msg={{a.id}}" class="btn btn-sm rounded-pill bg-mycolor text-light">View Detail<i class="fa-solid fa-eye"></i></a>
+
+                </div>
+                </div>
+            </div>
+                <!-- end upcomming event -->
+            {% endfor %}
+        </div>
+   </div>
+</div>
+
+ 
+{% endblock %}
+               
+      
+

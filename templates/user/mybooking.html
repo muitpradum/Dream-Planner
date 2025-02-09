@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+{% if not request.session.user %}
+<script>
+        alert('You have to login First')
+</script>
+{% endif %}
+<div class="fs-2 text-center">
+        My <b class="txt-mycolor"> Tickets <i class="fa-solid fa-ticket"></i></b>
+</div>
+<div class="row">
+        <div class="col-sm-8 mx-auto ">
+            <!--start card-->
+                <div class="card mb-3" style="width: 1000px;">
+  <div class="row g-0">
+    <div class="col-md-12" style="overflow-x:auto;">
+      <div class="card-body">
+        <table class="table table-hover">
+                <tr>
+                       <th>Event Picture</th>
+                        <th>Ticket No:</th>
+                        <th>Event Name:</th>
+                        <th>Price:</th>
+                        <th>Event Place</th>
+                        <th>Booking Date</th>
+                        <th>Event Date</th>
+                        
+                        <th>Cancel</th>
+                </tr>
+            {% for i in myticket%}
+                <tr>
+                    <td><img src="/{{i.event_picture}}" style="height:100px; width:100px;"></td>
+                        <td>EH0001{{i.id}}</td>
+                        <td>{{i.event_name}}</td>
+                        <td>{{i.event_price}}</td>
+                        <td>{{i.place}}</td>
+                        <td>{{i.booking_date}}</td>
+                        <td>{{i.event_date}}</td>
+                        
+                    <td><a href="/user/mybooking?bid={{i.id}}" class="btn btn-sm bg-warning">Cancel <i class="fa-solid fa-trash"></i></a> </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+  </div>
+</div>
+                <!--end card-->
+        </div>
+</div>
+{% endblock %}

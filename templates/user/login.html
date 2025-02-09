@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<style>
+    .form-control{
+    height:35px;
+    margin-bottom:3%;
+    background:#f2f2f2;
+}
+
+
+    
+</style>
+<div class="text-center fs-2">
+        User <b class="txt-mycolor">Login <i class="fa-solid fa-key"></i></b></div>
+<div class="row">
+    <div class="col-sm-5 mb-3 mx-auto bg-mycolor py-4 rounded rounded-3">
+        <form method="post">
+            {% csrf_token%}
+            USERNAME :
+            <input type="email" name="email" placeholder="Username.." class='form-control '>
+            PASSWORD :
+            <input type="password" name="passwd" placeholder="Enter your password.." class='form-control '>
+            <input type="submit" value="Login" class="btn bg-mycolor text-light">
+        </form>
+    </div>
+</div>
+{% endblock%}
